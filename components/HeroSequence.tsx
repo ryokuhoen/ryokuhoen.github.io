@@ -170,7 +170,7 @@ export default function HeroSequence() {
                 <h1 className="display display--hero hero-in" style={{ animationDelay: "0.25s" }}>
                   <span className="display__line nb">京の食を、</span>
                   <span className="display__line nb">
-                    <span className="nb">つくり、ひらき、</span>
+                    <span className="nb">しつらえ、ひらき、</span>
                     <span className="nb">届ける。</span>
                   </span>
                 </h1>
