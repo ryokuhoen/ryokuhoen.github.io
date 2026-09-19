@@ -1,0 +1,12 @@
+node_modules
+.next
+out
+next-env.d.ts
+*.tsbuildinfo
+.env*.local
+.DS_Store
+_review/tmp
+.next-*
+public/_img
+_review/
+assets-src/
