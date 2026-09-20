@@ -4,6 +4,7 @@ import type { Dict } from "@/lib/dict/ja";
 export const zh: Dict = {
   meta: {
     title: "綠步園股份有限公司 | 京都東山 餐飲經營／和洋菓子製造販售",
+    wordmark: "株式会社　緑歩園",
     titleShort: "綠步園股份有限公司",
     titleTemplate: "%s | 綠步園股份有限公司",
     description:

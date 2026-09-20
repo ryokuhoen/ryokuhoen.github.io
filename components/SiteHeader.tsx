@@ -50,7 +50,7 @@ export default function SiteHeader({ lang, dict }: { lang: Locale; dict: Dict })
     <header className="site-header" data-solid={solid || open || !isHome ? "true" : "false"}>
       <div className="site-header__inner">
         <Link href={home} className="wordmark" aria-label={`${site.legalName} ${dict.nav.home}`}>
-          {site.wordmark}
+          {dict.meta.wordmark}
         </Link>
 
         <nav className="gnav" aria-label={dict.nav.business}>

@@ -3,6 +3,7 @@ import type { Dict } from "@/lib/dict/ja";
 export const es: Dict = {
   meta: {
     title: "Ryokuhoen Co., Ltd. | Kioto, Higashiyama — restaurantes y repostería",
+    wordmark: "RYOKUHOEN Co., Ltd.",
     titleShort: "Ryokuhoen Co., Ltd.",
     titleTemplate: "%s | Ryokuhoen Co., Ltd.",
     description:

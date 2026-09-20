@@ -2,6 +2,7 @@
 export const ja = {
   meta: {
     title: "株式会社 緑歩園 | 京都・東山 飲食店運営／スイーツ製造・販売",
+    wordmark: "株式会社　緑歩園",
     titleShort: "株式会社 緑歩園",
     titleTemplate: "%s | 株式会社 緑歩園",
     description:

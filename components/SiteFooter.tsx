@@ -15,7 +15,7 @@ export default function SiteFooter({ lang, dict }: { lang: Locale; dict: Dict })
     <footer className="site-footer">
       <div className="container site-footer__grid">
         <div>
-          <p className="site-footer__mark">{site.wordmark}</p>
+          <p className="site-footer__mark">{dict.meta.wordmark}</p>
           <p className="site-footer__addr">
             {lang === "ja" ? `${site.postal} ${site.address}` : dict.contact.addressLines.join(" ")}
           </p>
