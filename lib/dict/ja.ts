@@ -115,6 +115,7 @@ export const ja = {
     h2: "会社概要",
     nameLabel: "商号",
     capitalLabel: "資本金",
+    capitalValue: "1000万円",
     trustTitle: "事業領域",
     areas: [
       "飲食店運営",

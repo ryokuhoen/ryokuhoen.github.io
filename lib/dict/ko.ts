@@ -116,6 +116,7 @@ export const ko: Dict = {
     h2: "회사 소개",
     nameLabel: "상호",
     capitalLabel: "자본금",
+    capitalValue: "1,000만 엔",
     trustTitle: "사업 영역",
     areas: [
       "음식점 운영",

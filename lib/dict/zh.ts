@@ -117,6 +117,7 @@ export const zh: Dict = {
     h2: "公司簡介",
     nameLabel: "公司名稱",
     capitalLabel: "資本額",
+    capitalValue: "1,000萬日圓",
     trustTitle: "事業領域",
     areas: [
       "餐飲店經營",

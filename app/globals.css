@@ -34,6 +34,31 @@
   --split-w: min(46vw, 70svh);
 }
 
+/* ───── 言語別の書体 ─────
+   日本語・欧文は変更なし。韓国語と繁体字だけ、その言語の書体に差し替える。 */
+body[data-lang="ko"] {
+  --f-mincho: var(--font-serif-ko), "Noto Serif KR", "Nanum Myeongjo", serif;
+  --f-gothic: var(--font-sans-ko), "Noto Sans KR", "Malgun Gothic", sans-serif;
+}
+body[data-lang="zh"] {
+  --f-mincho: var(--font-serif-zh), "Noto Serif TC", "Songti TC", "PMingLiU", serif;
+  --f-gothic: var(--font-sans-zh), "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+}
+/* ハングルは字間を詰めた方が締まる。語の途中で折らない。 */
+body[data-lang="ko"] { letter-spacing: 0; }
+body[data-lang="ko"] .display { letter-spacing: 0.02em; }
+body[data-lang="ko"] .display--hero { letter-spacing: 0.03em; line-height: 1.7; }
+body[data-lang="ko"] .h2 { letter-spacing: 0.01em; }
+body[data-lang="ko"] .h3,
+body[data-lang="ko"] .biz__lead,
+body[data-lang="ko"] .scene__title { letter-spacing: 0.01em; }
+body[data-lang="ko"] .body,
+body[data-lang="ko"] .store__desc,
+body[data-lang="ko"] .f-dest__list li { word-break: keep-all; overflow-wrap: break-word; }
+/* 繁体字は日本語よりわずかに詰める */
+body[data-lang="zh"] .display--hero { letter-spacing: 0.12em; }
+body[data-lang="zh"] .h2 { letter-spacing: 0.04em; }
+
 @theme inline {
   --color-ink: var(--ink);
   --color-paper: var(--paper);
@@ -280,8 +305,18 @@ a { color: inherit; text-decoration: none; }
   .menu-btn { display: none !important; }
 }
 /* 欧文（英語・スペイン語）は分かち書きなので、隣り合う nb の間に空白を入れる */
+/* 分かち書きの言語（英語・スペイン語・韓国語）は語の間に空白が要る。
+   .nb が inline-block のままだと行頭・行末の空白が消えるので inline + nowrap にして、
+   隣り合う nb の間にだけ空白を入れる（折り返し時は行頭の空白が自然に消える）。 */
+body[data-lang="en"] .nb,
+body[data-lang="es"] .nb,
+body[data-lang="ko"] .nb { display: inline; white-space: normal; }
+body[data-lang="en"] .display__line,
+body[data-lang="es"] .display__line,
+body[data-lang="ko"] .display__line { white-space: normal; }
 body[data-lang="en"] .nb + .nb::before,
-body[data-lang="es"] .nb + .nb::before { content: " "; white-space: pre; }
+body[data-lang="es"] .nb + .nb::before,
+body[data-lang="ko"] .nb + .nb::before { content: " "; }
 
 /* ───── 言語切替 ───── */
 .site-header__mobile { display: flex; align-items: center; gap: 18px; }
@@ -293,37 +328,65 @@ body[data-lang="es"] .nb + .nb::before { content: " "; white-space: pre; }
 }
 .lang { position: relative; }
 .lang__btn {
-  display: inline-flex; align-items: center; gap: 7px;
+  position: relative;
+  display: inline-flex; align-items: center; gap: 8px;
   min-height: 44px; padding: 0; background: none; border: 0; color: inherit; cursor: pointer;
-  font-family: var(--f-latin); font-size: 13px; letter-spacing: 0.16em;
+  font-family: var(--f-latin); font-size: 13px; letter-spacing: 0.2em;
+  transition: opacity 0.2s;
 }
 .lang__cur { line-height: 1; }
+/* 地球儀: 円＋赤道＋経線のみの細線 */
 .lang__globe {
-  width: 13px; height: 13px; border: 1px solid currentColor; border-radius: 50%;
-  position: relative; opacity: 0.85;
+  width: 14px; height: 14px; flex: none;
+  border: 1px solid currentColor; border-radius: 50%;
+  position: relative; opacity: 0.8;
 }
-.lang__globe::before, .lang__globe::after {
-  content: ""; position: absolute; inset: 0; border: 1px solid currentColor; border-radius: 50%;
+.lang__globe::before {
+  content: ""; position: absolute; inset: -1px;
+  border: 1px solid currentColor; border-radius: 50%;
+  transform: scaleX(0.5);
 }
-.lang__globe::before { border-width: 0 1px; border-radius: 50%; transform: scaleX(0.45); }
-.lang__globe::after { border-width: 1px 0; border-radius: 0; transform: scaleY(0.001); top: 50%; }
-.lang__btn:hover { color: var(--matcha); }
-.site-header[data-solid="false"] .lang__btn:hover { color: inherit; opacity: 0.75; }
-.lang__menu {
-  position: absolute; top: calc(100% + 10px); right: 0; z-index: 30;
-  margin: 0; padding: 8px 0; list-style: none; min-width: 148px;
+.lang__globe::after {
+  content: ""; position: absolute; left: 0; right: 0; top: 50%;
+  border-top: 1px solid currentColor;
+}
+/* 下線はホバーで伸びる（ナビのリンクと同じ振る舞い） */
+.lang__btn::after {
+  content: ""; position: absolute; left: 22px; right: 0; bottom: 10px; height: 1px;
+  background: currentColor; transform: scaleX(0); transform-origin: left;
+  transition: transform 0.2s var(--ease);
+}
+.lang__btn:hover::after,
+.lang__btn[aria-expanded="true"]::after { transform: scaleX(1); }
+.site-header[data-solid="true"] .lang__btn:hover { color: var(--matcha); }
+.site-header[data-solid="false"] .lang__btn { text-shadow: 0 0 14px rgba(10, 10, 9, 0.45); }
+.site-header[data-solid="false"] .lang__globe { opacity: 0.9; }
+
+ul.lang__menu {
+  /* ヘッダーの .gnav ul が flex のため、詳細度を上げて縦並びに戻す */
+  position: absolute; top: calc(100% + 12px); right: 0; z-index: 30;
+  display: block;
+  margin: 0; padding: 6px 0; list-style: none; min-width: 168px; width: max-content;
   background: var(--paper); border: 1px solid var(--line); border-radius: 2px;
   opacity: 0; transform: translateY(-4px); pointer-events: none;
   transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
 }
-.lang__menu[data-open="true"] { opacity: 1; transform: none; pointer-events: auto; }
+ul.lang__menu[data-open="true"] { opacity: 1; transform: none; pointer-events: auto; }
 .lang__item {
-  display: block; padding: 9px 18px; color: var(--ink); text-decoration: none;
-  font-family: var(--f-gothic); font-size: 13px; letter-spacing: 0.06em; white-space: nowrap;
+  position: relative;
+  display: flex; align-items: center; min-height: 44px;
+  padding: 0 20px 0 34px; color: var(--ink); text-decoration: none;
+  font-family: var(--f-gothic); font-size: 14px; letter-spacing: 0.04em; white-space: nowrap;
+  transition: color 0.2s, background-color 0.2s;
 }
-.lang__item:hover { background: var(--paper-deep); color: var(--matcha); }
+ul.lang__menu > li { display: block; width: 100%; }
+.lang__item:hover { background: var(--paper-deep); }
 .lang__item[aria-current="true"] { color: var(--matcha); }
-.lang__item[aria-current="true"]::before { content: "—"; margin-right: 8px; opacity: 0.6; }
+.lang__item[aria-current="true"]::before {
+  content: ""; position: absolute; left: 20px; top: 50%;
+  width: 8px; height: 1px; background: var(--gold);
+}
+
 
 .menu-btn {
   display: inline-flex; align-items: center; gap: 12px;
@@ -468,6 +531,10 @@ body[data-lang="es"] .nb + .nb::before { content: " "; white-space: pre; }
 .scene__copy--lead .display { color: #fff; }
 @media (min-width: 640px) {
   .display__line { display: block; width: fit-content; }
+  /* 分かち書きの言語では .nb を inline にしているため、行の塊だけ block に戻す */
+  body[data-lang="en"] .display__line,
+  body[data-lang="es"] .display__line,
+  body[data-lang="ko"] .display__line { display: block; width: fit-content; }
 }
 
 /* 進捗インジケーター（右端・縦） */

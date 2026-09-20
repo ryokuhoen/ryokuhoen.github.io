@@ -116,6 +116,7 @@ export const es: Dict = {
     h2: "La empresa",
     nameLabel: "Razón social",
     capitalLabel: "Capital social",
+    capitalValue: "10 millones de yenes",
     trustTitle: "A qué nos dedicamos",
     areas: [
       "Explotación de restaurantes",

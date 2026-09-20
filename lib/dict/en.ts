@@ -116,6 +116,7 @@ export const en: Dict = {
     h2: "Company",
     nameLabel: "Name",
     capitalLabel: "Capital",
+    capitalValue: "10 million yen",
     trustTitle: "What we do",
     areas: [
       "Restaurant operation",

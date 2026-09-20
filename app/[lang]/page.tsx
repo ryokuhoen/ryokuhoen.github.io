@@ -240,7 +240,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               </div>
               <div>
                 <dt>{d.company.capitalLabel}</dt>
-                <dd>{site.capital}</dd>
+                <dd>{d.company.capitalValue}</dd>
               </div>
             </dl>
 

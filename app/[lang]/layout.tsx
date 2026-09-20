@@ -1,32 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Shippori_Mincho, Zen_Kaku_Gothic_New, Cormorant_Garamond } from "next/font/google";
 import "../globals.css";
 import { site } from "@/lib/site";
+import { baseFontVars, langFontVars } from "@/lib/fonts";
 import { getDict, htmlLang, locales, ogLocale, path, type Locale } from "@/lib/i18n";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import RevealObserver from "@/components/RevealObserver";
-
-const mincho = Shippori_Mincho({
-  weight: ["500"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-  variable: "--font-mincho",
-});
-const gothic = Zen_Kaku_Gothic_New({
-  weight: ["400", "500"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-  variable: "--font-gothic",
-});
-const garamond = Cormorant_Garamond({
-  weight: ["400", "500"],
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-garamond",
-});
 
 export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
@@ -110,7 +89,7 @@ export default async function RootLayout({
   const { lang } = (await params) as { lang: Locale };
   const d = getDict(lang);
   return (
-    <html lang={htmlLang[lang]} className={`${mincho.variable} ${gothic.variable} ${garamond.variable}`}>
+    <html lang={htmlLang[lang]} className={`${baseFontVars} ${langFontVars[lang] ?? ""}`.trim()}>
       <body data-lang={lang}>
         <script
           type="application/ld+json"
