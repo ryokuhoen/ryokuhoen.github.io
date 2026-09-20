@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>株式会社 緑歩園</title>
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="https://ryokuhoen.co.jp/ja/" />
+    <link rel="alternate" hreflang="ja" href="https://ryokuhoen.co.jp/ja/" />
+    <link rel="alternate" hreflang="en" href="https://ryokuhoen.co.jp/en/" />
+    <link rel="alternate" hreflang="zh-Hant" href="https://ryokuhoen.co.jp/zh/" />
+    <link rel="alternate" hreflang="ko" href="https://ryokuhoen.co.jp/ko/" />
+    <link rel="alternate" hreflang="es" href="https://ryokuhoen.co.jp/es/" />
+    <link rel="alternate" hreflang="x-default" href="https://ryokuhoen.co.jp/ja/" />
+    <meta http-equiv="refresh" content="0; url=./ja/" />
+    <style>
+      body {
+        margin: 0;
+        min-height: 100svh;
+        display: grid;
+        place-items: center;
+        background: #f7f4ef;
+        color: #4a4844;
+        font-family: system-ui, sans-serif;
+        font-size: 14px;
+        letter-spacing: 0.06em;
+      }
+      a { color: #3d5c45; }
+    </style>
+    <script>
+      // ブラウザの言語に合わせて最初の言語を選ぶ（対応外は日本語）
+      (function () {
+        var supported = ["ja", "en", "zh", "ko", "es"];
+        var to = "ja";
+        var list = navigator.languages || [navigator.language || "ja"];
+        for (var i = 0; i < list.length; i++) {
+          var tag = String(list[i] || "").toLowerCase();
+          var base = tag.split("-")[0];
+          if (base === "zh") { to = "zh"; break; }
+          if (supported.indexOf(base) !== -1) { to = base; break; }
+        }
+        location.replace("./" + to + "/");
+      })();
+    </script>
+  </head>
+  <body>
+    <p><a href="./ja/">株式会社 緑歩園</a></p>
+  </body>
+</html>

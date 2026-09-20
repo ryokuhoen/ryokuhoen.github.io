@@ -4,13 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { links, site } from "@/lib/site";
-
-const nav = [
-  { href: "/#sweets", label: "事業" },
-  { href: "/sweets", label: "自社工房" },
-  { href: "/#company", label: "会社" },
-  { href: "/#contact", label: "お問い合わせ" },
-];
+import { path, type Dict, type Locale } from "@/lib/i18n";
+import LangSwitch from "@/components/LangSwitch";
 
 const ext = [
   { href: links.tsuburano.href, label: "つぶら乃" },
@@ -18,10 +13,18 @@ const ext = [
   { href: links.stores.href, label: "Store" },
 ];
 
-export default function SiteHeader() {
+export default function SiteHeader({ lang, dict }: { lang: Locale; dict: Dict }) {
   const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const home = path(lang);
+
+  const nav = [
+    { href: path(lang, "/#sweets"), label: dict.nav.business },
+    { href: path(lang, "/sweets"), label: dict.nav.factory },
+    { href: path(lang, "/#company"), label: dict.nav.company },
+    { href: path(lang, "/#contact"), label: dict.nav.contact },
+  ];
 
   useEffect(() => {
     const on = () => setSolid(window.scrollY > 80);
@@ -41,14 +44,16 @@ export default function SiteHeader() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
+  const isHome = pathname === home || pathname === home.replace(/\/$/, "");
+
   return (
-    <header className="site-header" data-solid={solid || open || pathname !== "/" ? "true" : "false"}>
+    <header className="site-header" data-solid={solid || open || !isHome ? "true" : "false"}>
       <div className="site-header__inner">
-        <Link href="/" className="wordmark" aria-label={`${site.legalName} トップへ`}>
+        <Link href={home} className="wordmark" aria-label={`${site.legalName} ${dict.nav.home}`}>
           {site.wordmark}
         </Link>
 
-        <nav className="gnav" aria-label="メイン">
+        <nav className="gnav" aria-label={dict.nav.business}>
           <ul className="gnav__main">
             {nav.map((n) => (
               <li key={n.href}>
@@ -72,18 +77,22 @@ export default function SiteHeader() {
               </li>
             ))}
           </ul>
+          <LangSwitch lang={lang} label={dict.nav.language} />
         </nav>
 
-        <button
-          type="button"
-          className="menu-btn"
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          onClick={() => setOpen((v) => !v)}
-        >
-          <span className="menu-btn__label">{open ? "Close" : "Menu"}</span>
-          <span className="menu-btn__lines" aria-hidden="true" data-open={open} />
-        </button>
+        <div className="site-header__mobile">
+          <LangSwitch lang={lang} label={dict.nav.language} />
+          <button
+            type="button"
+            className="menu-btn"
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            onClick={() => setOpen((v) => !v)}
+          >
+            <span className="menu-btn__label">{open ? dict.nav.close : dict.nav.menu}</span>
+            <span className="menu-btn__lines" aria-hidden="true" data-open={open} />
+          </button>
+        </div>
       </div>
 
       <div id="mobile-menu" className="mobile-menu" data-open={open} hidden={!open}>

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { site } from "@/lib/site";
+import type { Dict } from "@/lib/i18n";
 
 /**
  * お問い合わせフォーム。
@@ -11,7 +12,8 @@ import { site } from "@/lib/site";
  */
 type Status = "idle" | "sending" | "done" | "fallback";
 
-export default function ContactForm() {
+export default function ContactForm({ dict }: { dict: Dict }) {
+  const f = dict.contact.form;
   const [status, setStatus] = useState<Status>("idle");
   const [mailto, setMailto] = useState("");
 
@@ -24,8 +26,8 @@ export default function ContactForm() {
     const email = String(fd.get("email") ?? "");
     const body = String(fd.get("message") ?? "");
     setMailto(
-      `mailto:${site.email}?subject=${encodeURIComponent("【ホームページより】お問い合わせ")}` +
-        `&body=${encodeURIComponent(`お名前：${name}\nメール：${email}\n\n${body}`)}`,
+      `mailto:${site.email}?subject=${encodeURIComponent(f.mailSubject)}` +
+        `&body=${encodeURIComponent(`${f.mailName}: ${name}\n${f.mailEmail}: ${email}\n\n${body}`)}`,
     );
 
     if (!site.formEnabled) {
@@ -38,11 +40,11 @@ export default function ContactForm() {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
-          お名前: name,
-          メールアドレス: email,
-          お問い合わせ内容: body,
+          [f.name]: name,
+          [f.email]: email,
+          [f.message]: body,
           _replyto: email,
-          _subject: "【緑歩園ホームページ】お問い合わせ",
+          _subject: f.mailSubject,
           _template: "table",
         }),
       });
@@ -58,42 +60,38 @@ export default function ContactForm() {
   return (
     <form className="form" onSubmit={onSubmit}>
       <div className="field">
-        <label htmlFor="f-name">お名前</label>
+        <label htmlFor="f-name">{f.name}</label>
         <input id="f-name" name="name" type="text" autoComplete="name" required />
       </div>
       <div className="field">
-        <label htmlFor="f-email">メールアドレス</label>
+        <label htmlFor="f-email">{f.email}</label>
         <input id="f-email" name="email" type="email" autoComplete="email" inputMode="email" required />
       </div>
       <div className="field">
-        <label htmlFor="f-message">お問い合わせ内容</label>
+        <label htmlFor="f-message">{f.message}</label>
         <textarea id="f-message" name="message" rows={5} required />
       </div>
       <input type="text" name="_honey" tabIndex={-1} autoComplete="off" aria-hidden="true" className="sr-only" />
       <div className="form__foot">
         <button type="submit" className="btn-primary" disabled={status === "sending"}>
-          {status === "sending" ? "送信中…" : "送信する"}
+          {status === "sending" ? f.sending : f.submit}
         </button>
         {!site.formEnabled && (
-          <p className="form__note">
-            フォームは現在準備中です。送信ボタンを押すと、メールでのお問い合わせをご案内します。
-          </p>
+          <p className="form__note">{f.note}</p>
         )}
       </div>
       {status === "done" && (
         <div className="form__notice" role="status">
-          <p>お問い合わせを受け付けました。内容を確認のうえ、担当者よりご連絡いたします。</p>
+          <p>{f.done}</p>
         </div>
       )}
       {status === "fallback" && (
         <div className="form__notice" role="status">
           <p>
-            {site.formEnabled
-              ? "送信できませんでした。お手数ですが、メールにてお送りください。"
-              : "フォームからの送信は準備中です。お手数ですが、メールにてお送りください。"}
+            {site.formEnabled ? f.failed : f.preparing}
           </p>
           <a href={mailto} className="text-cta">
-            入力内容をメールで送る
+            {f.mailLink}
           </a>
         </div>
       )}

@@ -3,16 +3,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import { path, type Dict, type Locale } from "@/lib/i18n";
 
 type Scene = {
   src: string;
-  alt: string;
   w: number;
   h: number;
   no: string;
-  kicker: string;
-  title?: string[];
-  caption?: string;
   layout: "full" | "split-right" | "split-left";
   /** モバイル（全面表示）時の object-position */
   pos: string;
@@ -23,48 +20,34 @@ type Scene = {
 const scenes: Scene[] = [
   {
     src: "/images/hero-01-yasaka-night.jpg",
-    alt: "夜桜越しに見る八坂の塔（京都・東山）",
     w: 2560,
     h: 1708,
     no: "01",
-    kicker: "Higashiyama",
     layout: "full",
     pos: "12% 50%",
     posWide: "50% 42%",
   },
   {
     src: "/images/hero-02-noren-garden.jpg",
-    alt: "暖簾のかかる入口と苔の庭、飛び石",
     w: 1335,
     h: 2000,
     no: "02",
-    kicker: "Entrance",
-    title: ["暖簾をくぐり、", "裏庭へ。"],
-    caption: "清水の参道から、一歩内へ。",
     layout: "split-right",
     pos: "50% 60%",
   },
   {
     src: "/images/hero-03-momiji-eaves.jpg",
-    alt: "木の軒ともみじの若葉を見上げる",
     w: 1335,
     h: 2000,
     no: "03",
-    kicker: "Seasons",
-    title: ["木の軒に、", "季節の色。"],
-    caption: "建物と庭が、季節を映す。",
     layout: "split-left",
     pos: "40% 50%",
   },
   {
     src: "/images/hero-04-hassun.jpg",
-    alt: "朱の器に盛られた八寸の料理",
     w: 2560,
     h: 1920,
     no: "04",
-    kicker: "Hassun",
-    title: ["季節を、", "ひと皿に。"],
-    caption: "器に季節を映す、八寸。",
     layout: "full",
     pos: "60% 50%",
     posWide: "50% 58%",
@@ -74,7 +57,7 @@ const scenes: Scene[] = [
 const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const ease = (x: number) => 1 - Math.pow(1 - x, 3); // easeOutCubic 相当
 
-export default function HeroSequence() {
+export default function HeroSequence({ lang, dict }: { lang: Locale; dict: Dict }) {
   const root = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -134,9 +117,11 @@ export default function HeroSequence() {
   }, []);
 
   return (
-    <section ref={root} className="hero" aria-label="京都・東山から" data-static="false">
+    <section ref={root} className="hero" aria-label={dict.hero.ariaLabel} data-static="false">
       <div className="hero__stage">
-        {scenes.map((s, k) => (
+        {scenes.map((s, k) => {
+          const c = dict.hero.scenes[k];
+          return (
           <div
             key={s.src}
             className={`scene scene--${s.layout}`}
@@ -146,7 +131,7 @@ export default function HeroSequence() {
             <div className="scene__media">
               <Image
                 src={s.src}
-                alt={s.alt}
+                alt={c.alt}
                 fill
                 preload={k === 0}
                 loading={k === 0 ? undefined : "eager"}
@@ -165,21 +150,21 @@ export default function HeroSequence() {
             {k === 0 ? (
               <div className="scene__copy scene__copy--lead">
                 <p className="kicker kicker--light hero-in" style={{ animationDelay: "0.1s" }}>
-                  KYOTO / FOOD CULTURE
+                  {dict.hero.kicker}
                 </p>
                 <h1 className="display display--hero hero-in" style={{ animationDelay: "0.25s" }}>
-                  <span className="display__line nb">京の食を、</span>
+                  <span className="display__line nb">{dict.hero.display[0]}</span>
                   <span className="display__line nb">
-                    <span className="nb">しつらえ、ひらき、</span>
-                    <span className="nb">届ける。</span>
+                    <span className="nb">{dict.hero.display[1]}</span>
+                    <span className="nb">{dict.hero.display[2]}</span>
                   </span>
                 </h1>
                 <div className="hero__cta hero-in" style={{ animationDelay: "0.45s" }}>
-                  <Link href="/#sweets" className="text-cta text-cta--light">
-                    事業を見る
+                  <Link href={path(lang, "/#sweets")} className="text-cta text-cta--light">
+                    {dict.hero.ctaBusiness}
                   </Link>
-                  <Link href="/#contact" className="text-cta text-cta--light text-cta--quiet">
-                    お問い合わせ
+                  <Link href={path(lang, "/#contact")} className="text-cta text-cta--light text-cta--quiet">
+                    {dict.hero.ctaContact}
                   </Link>
                 </div>
               </div>
@@ -188,18 +173,19 @@ export default function HeroSequence() {
                 <p className="scene__no">
                   <span>{s.no}</span>
                   <span className="scene__dash" aria-hidden="true" />
-                  <span>{s.kicker}</span>
+                  <span>{c.kicker}</span>
                 </p>
                 <h2 className="scene__title">
-                  {s.title?.map((t) => (
+                  {c.title?.map((t) => (
                     <span key={t} className="nb">{t}</span>
                   ))}
                 </h2>
-                {s.caption && <p className="scene__caption">{s.caption}</p>}
+                {c.caption && <p className="scene__caption">{c.caption}</p>}
               </div>
             )}
-          </div>
-        ))}
+            </div>
+          );
+        })}
 
         <div className="hero__progress" aria-hidden="true">
           <span className="hero__count">
@@ -216,7 +202,7 @@ export default function HeroSequence() {
 
         <div className="hero__scroll" aria-hidden="true">
           <span className="hero__scroll-line" />
-          <span className="hero__scroll-label">Scroll</span>
+          <span className="hero__scroll-label">{dict.hero.scroll}</span>
         </div>
       </div>
     </section>
