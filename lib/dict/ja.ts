@@ -85,8 +85,8 @@ export const ja = {
     h2: "店舗運営",
     intro:
       "京都・東山のお食事処・甘味処〈つぶら乃京都本店〉、新宿御苑内の〈つぶら乃新宿御苑店〉、自社焙煎の珈琲とスイーツの〈馬町珈琲〉。京都を散策の際は、ぜひお立ち寄りください。",
-    roasterAlt: "GIESEN社製のコーヒー焙煎機。黒い本体に金色の金具",
-    roasterCaption: "自社焙煎　GIESEN社製の焙煎機",
+    roasterAlt: "自社工房のGIESEN社製コーヒー焙煎機。黒い本体に金色の金具",
+    roasterCaption: "自社工房の焙煎機　GIESEN社製",
     items: [
       {
         name: "つぶら乃 京都本店",

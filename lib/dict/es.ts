@@ -86,8 +86,8 @@ export const es: Dict = {
     h2: "Restaurantes",
     intro:
       "Tsuburano Kioto, casa de comidas y dulces en Higashiyama; Tsuburano Shinjuku Gyoen, dentro del jardín nacional Shinjuku Gyoen de Tokio; y Umamachi Coffee, con café de tueste propio y repostería. Le esperamos cuando visite Kioto.",
-    roasterAlt: "Tostador de café GIESEN, cuerpo negro con piezas doradas",
-    roasterCaption: "Tueste propio — nuestro tostador GIESEN",
+    roasterAlt: "Tostador de café GIESEN de nuestro obrador, cuerpo negro con piezas doradas",
+    roasterCaption: "Nuestro tostador GIESEN en el obrador propio",
     items: [
       {
         name: "Tsuburano Kioto",

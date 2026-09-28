@@ -87,8 +87,8 @@ export const zh: Dict = {
     h2: "門市經營",
     intro:
       "京都東山的餐飲與甜點店〈つぶら乃京都本店〉、位於東京新宿御苑內的〈つぶら乃新宿御苑店〉，以及提供自家烘焙咖啡與甜點的〈馬町珈琲〉。到京都散步時，歡迎順道前來。",
-    roasterAlt: "GIESEN 咖啡烘豆機。黑色機身搭配金色配件",
-    roasterCaption: "自家烘焙　GIESEN 烘豆機",
+    roasterAlt: "自家工坊的 GIESEN 咖啡烘豆機。黑色機身搭配金色配件",
+    roasterCaption: "自家工坊的 GIESEN 烘豆機",
     items: [
       {
         name: "つぶら乃 京都本店",

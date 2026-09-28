@@ -86,8 +86,8 @@ export const ko: Dict = {
     h2: "매장 운영",
     intro:
       "교토 히가시야마의 식사·디저트 가게 〈쓰부라노 교토 본점〉, 도쿄 신주쿠 교엔 안의 〈쓰부라노 신주쿠 교엔점〉, 자가 배전 커피와 디저트의 〈우마마치 커피〉. 교토를 거닐 때 들러 주세요.",
-    roasterAlt: "GIESEN 커피 로스터. 검은 본체에 금색 부품",
-    roasterCaption: "자가 배전 — GIESEN 로스터",
+    roasterAlt: "자사 공방의 GIESEN 커피 로스터. 검은 본체에 금색 부품",
+    roasterCaption: "자사 공방의 GIESEN 로스터",
     items: [
       {
         name: "쓰부라노 교토 본점",

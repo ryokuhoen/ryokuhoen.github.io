@@ -86,8 +86,8 @@ export const en: Dict = {
     h2: "Restaurants",
     intro:
       "Tsuburano Kyoto, a restaurant and sweets house in Higashiyama; Tsuburano Shinjuku Gyoen, inside the Shinjuku Gyoen National Garden in Tokyo; and Umamachi Coffee, serving house-roasted coffee and sweets. Please visit us when you are in Kyoto.",
-    roasterAlt: "GIESEN coffee roaster with a black body and gold fittings",
-    roasterCaption: "House roasting — our GIESEN roaster",
+    roasterAlt: "GIESEN coffee roaster at our workshop, with a black body and gold fittings",
+    roasterCaption: "Our GIESEN roaster at the company workshop",
     items: [
       {
         name: "Tsuburano Kyoto",
