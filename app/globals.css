@@ -705,7 +705,6 @@ ul.lang__menu > li { display: block; width: 100%; }
   margin: calc(var(--s2) * -1) 0 var(--s2);
   color: var(--ink-soft);
 }
-.biz__inset { display: none; }
 @media (min-width: 960px) {
   .biz__grid { grid-template-columns: 7fr 5fr; gap: clamp(48px, 6vw, 104px); align-items: start; }
   .biz__media { margin-left: calc(var(--bleed) * -1); }
@@ -713,8 +712,29 @@ ul.lang__menu > li { display: block; width: 100%; }
   .biz__grid--rev .biz__media { order: 2; margin-left: 0; margin-right: calc(var(--bleed) * -1); }
   .biz__grid--rev .biz__text { order: 1; }
   .biz__text { padding-top: clamp(24px, 6vw, 96px); }
-  .biz__inset { display: block; width: 44%; margin-top: var(--s4); margin-left: auto; }
   .biz__grid:not(.biz__grid--rev) .biz__media .caption { padding-left: var(--bleed); }
+}
+
+/* スイーツ: 上段＝主役のどら焼き＋本文、下段＝工房の設備（3枚組）＋外観。
+   左右どちらの列も下まで埋まるよう2段に組む。工房写真は元が小さいので拡大しない。 */
+.facility {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+}
+.facility .photo img { aspect-ratio: 3 / 4; object-fit: cover; }
+/* スマホでは3列が狭いので字間を詰め、語の途中で折れないようにする */
+.facility .caption { margin-top: 8px; letter-spacing: 0.02em; }
+@media (min-width: 640px) { .facility .caption { letter-spacing: 0.08em; } }
+.biz__exterior { width: 64%; max-width: 352px; }
+@media (min-width: 960px) {
+  .biz__grid--sweets {
+    grid-template-areas: "media text" "facility exterior";
+    row-gap: var(--s4);
+  }
+  .biz__grid--sweets .biz__media { grid-area: media; }
+  .biz__grid--sweets .biz__text { grid-area: text; }
+  .facility { grid-area: facility; gap: clamp(16px, 1.8vw, 24px); }
+  .biz__exterior { grid-area: exterior; width: 100%; }
 }
 
 /* オンラインストア: 原寸666pxの写真を引き伸ばさない小さめの縦長枠 */
@@ -738,7 +758,9 @@ ul.lang__menu > li { display: block; width: 100%; }
 .store__addr { margin: 0; font-size: 13px; color: var(--ink-soft); letter-spacing: 0.04em; }
 .store__meta .text-cta { justify-self: start; font-size: 14px; }
 .store--shinjuku .photo img { aspect-ratio: 3 / 4; object-fit: cover; object-position: 50% 60%; }
-.store--umamachi .photo img { aspect-ratio: 4 / 3; object-fit: cover; object-position: 30% 50%; }
+.store--umamachi .store__main-photo img { aspect-ratio: 4 / 3; object-fit: cover; object-position: 30% 50%; }
+.store__roaster { width: 64%; margin-top: var(--s3); }
+.store__roaster img { aspect-ratio: 3 / 4; object-fit: cover; }
 @media (min-width: 960px) {
   .stores__grid {
     grid-template-columns: repeat(12, 1fr);
@@ -746,9 +768,18 @@ ul.lang__menu > li { display: block; width: 100%; }
     row-gap: 0;
     align-items: start;
   }
-  .store--main { grid-column: 1 / span 7; grid-row: 1 / span 2; }
+  .store--main { grid-column: 1 / span 7; grid-row: 1; }
   .store--shinjuku { grid-column: 9 / span 4; grid-row: 1; margin-top: 120px; }
-  .store--umamachi { grid-column: 8 / span 5; grid-row: 2; margin-top: var(--s4); }
+  /* 馬町珈琲: 左に焙煎機（新宿御苑店と同じ4列・縦長で対にする）、右に外観＋店舗情報 */
+  .store--umamachi {
+    grid-column: 1 / -1; grid-row: 2;
+    display: grid; grid-template-columns: subgrid;
+    margin-top: var(--s3);
+    align-items: start;
+  }
+  .store--umamachi .store__main-photo { grid-column: 7 / span 6; grid-row: 1; margin-top: 120px; }
+  .store--umamachi .store__meta { grid-column: 7 / span 6; grid-row: 2; }
+  .store__roaster { grid-column: 2 / span 4; grid-row: 1 / span 2; width: auto; margin-top: calc(var(--s4) * -1); }
 }
 
 /* ---- Company + Trust ---- */

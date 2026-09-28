@@ -62,7 +62,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             <span>01 / 03</span>
           </p>
         </div>
-        <div className="biz__grid container">
+        <div className="biz__grid biz__grid--sweets container">
           <figure className="biz__media photo" data-reveal>
             <Image
               src="/images/sweets-dorayaki.jpg"
@@ -96,18 +96,41 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                 <span className="nb">{links.factory.label}</span>
               </Ext>
             </div>
-            <figure className="biz__inset photo" data-reveal>
-              <Image
-                src="/images/factory-oven.jpg"
-                alt={d.sweets.insetAlt}
-                width={1350}
-                height={1800}
-                sizes="(min-width: 960px) 16vw, 40vw"
-                quality={75}
-              />
-              <figcaption className="caption">{d.sweets.insetCaption}</figcaption>
-            </figure>
           </div>
+          {/* 工房の設備：元画像が低解像度（幅約470px）のため、小さな3枚組で見せる */}
+          <ul className="facility" data-reveal>
+            {[
+              { src: "/images/factory-kitchen.jpg", w: 474 },
+              { src: "/images/factory-filler.jpg", w: 476 },
+              { src: "/images/factory-airshower.jpg", w: 422 },
+            ].map((p, i) => (
+              <li key={p.src}>
+                <figure className="photo">
+                  <Image
+                    src={p.src}
+                    alt={d.sweets.facility[i].alt}
+                    width={p.w}
+                    height={642}
+                    sizes="(min-width: 960px) 16vw, 30vw"
+                    quality={82}
+                  />
+                  <figcaption className="caption">{d.sweets.facility[i].caption}</figcaption>
+                </figure>
+              </li>
+            ))}
+          </ul>
+          {/* 工房の外観：原寸455pxのため引き伸ばさない */}
+          <figure className="biz__exterior photo" data-reveal>
+            <Image
+              src="/images/factory-exterior.jpg"
+              alt={d.sweets.exteriorAlt}
+              width={455}
+              height={373}
+              sizes="(min-width: 960px) 340px, 64vw"
+              quality={82}
+            />
+            <figcaption className="caption">{d.sweets.exteriorCaption}</figcaption>
+          </figure>
         </div>
       </section>
 
@@ -169,14 +192,14 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             </div>
           </article>
 
-          <article className="store store--sub store--umamachi" data-reveal>
-            <figure className="photo">
+          <article className="store store--umamachi" data-reveal>
+            <figure className="photo store__main-photo">
               <Image
                 src="/images/stores-umamachi-exterior.jpg"
                 alt={d.stores.items[2].alt}
                 width={1800}
                 height={1012}
-                sizes="(min-width: 960px) 30vw, 100vw"
+                sizes="(min-width: 960px) 44vw, 100vw"
                 quality={75}
               />
             </figure>
@@ -185,6 +208,17 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               <p className="store__desc">{d.stores.items[2].desc}</p>
               <Ext href={links.umamachi.href}>{links.umamachi.label}</Ext>
             </div>
+            <figure className="photo store__roaster">
+              <Image
+                src="/images/stores-umamachi-roaster.jpg"
+                alt={d.stores.roasterAlt}
+                width={1500}
+                height={2000}
+                sizes="(min-width: 960px) 26vw, 60vw"
+                quality={75}
+              />
+              <figcaption className="caption">{d.stores.roasterCaption}</figcaption>
+            </figure>
           </article>
         </div>
       </section>

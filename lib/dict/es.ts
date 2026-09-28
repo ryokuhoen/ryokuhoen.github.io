@@ -58,7 +58,7 @@ export const es: Dict = {
     kicker: "Our Policy",
     h2: ["Desde Kioto,", "su cultura gastronómica."],
     body:
-      "Al pie de la pagoda Yasaka, en Higashiyama, se encuentra nuestra casa principal, Tsuburano Kioto, en un edificio de estilo sukiya de cien años. Desde aquí añadimos valor nuevo a los sabores de siempre: una cafetería con tueste propio en Gojo y un obrador cerca del aeropuerto de Kansai que elabora y distribuye repostería.",
+      "Al pie de la pagoda Yasaka, en Higashiyama, se encuentra nuestra casa principal, Tsuburano Kioto, en un edificio de estilo sukiya de cien años. Desde aquí añadimos valor nuevo a los sabores de siempre: una cafetería con tueste propio en Gojo y un obrador cerca del aeropuerto de Kansai que elabora y distribuye repostería. En Tokio, Tsuburano Shinjuku Gyoen, dentro del jardín Shinjuku Gyoen, acerca los sabores de Kioto.",
     alt: "La cuesta que sube hacia la pagoda Yasaka y la fachada de Tsuburano Kioto",
     caption: "La cuesta hacia la pagoda Yasaka, Higashiyama — Tsuburano Kioto",
   },
@@ -72,8 +72,13 @@ export const es: Dict = {
     cta: "Ver el obrador",
     alt: "Dorayaki de Tsuburano: masa de matcha y chocolate rellena de warabi mochi y crema, con hojas de té sobre pizarra",
     caption: ["Dorayaki de Tsuburano", "matcha y chocolate,", "con warabi mochi y crema"],
-    insetAlt: "Horno de solera de nuestro obrador",
-    insetCaption: "Nuestro obrador — horno de solera",
+    facility: [
+      { alt: "Cocina de nuestro obrador: hornos de solera y cámara de fermentación sobre suelo azul", caption: "Hornos y fermentadora" },
+      { alt: "Máquina dosificadora con tolva y mesa giratoria en nuestro obrador", caption: "Dosificadora" },
+      { alt: "Ducha de aire a la entrada de nuestro obrador", caption: "Ducha de aire" },
+    ],
+    exteriorAlt: "Fachada de nuestro obrador: edificio de una planta revestido de chapa negra",
+    exteriorCaption: "Nuestro obrador, cerca del aeropuerto de Kansai",
   },
   stores: {
     index: "Business",
@@ -81,6 +86,8 @@ export const es: Dict = {
     h2: "Restaurantes",
     intro:
       "Tsuburano Kioto, casa de comidas y dulces en Higashiyama; Tsuburano Shinjuku Gyoen, dentro del jardín nacional Shinjuku Gyoen de Tokio; y Umamachi Coffee, con café de tueste propio y repostería. Le esperamos cuando visite Kioto.",
+    roasterAlt: "Tostador de café GIESEN, cuerpo negro con piezas doradas",
+    roasterCaption: "Tueste propio — nuestro tostador GIESEN",
     items: [
       {
         name: "Tsuburano Kioto",

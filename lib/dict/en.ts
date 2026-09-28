@@ -58,7 +58,7 @@ export const en: Dict = {
     kicker: "Our Policy",
     h2: ["From Kyoto,", "sharing its food culture."],
     body:
-      "At the foot of Yasaka Pagoda in Higashiyama stands our head restaurant, Tsuburano Kyoto, in a hundred-year-old sukiya-style house. From here we add new value to traditional flavors: a coffee house roasting its own beans in Gojo, and a confectionery workshop near Kansai International Airport that produces and supplies sweets.",
+      "At the foot of Yasaka Pagoda in Higashiyama stands our head restaurant, Tsuburano Kyoto, in a hundred-year-old sukiya-style house. From here we add new value to traditional flavors: a coffee house roasting its own beans in Gojo, and a confectionery workshop near Kansai International Airport that produces and supplies sweets. In Tokyo, Tsuburano Shinjuku Gyoen, inside the grounds of Shinjuku Gyoen, brings the flavors of Kyoto to the capital.",
     alt: "The sloping lane to Yasaka Pagoda and the exterior of Tsuburano Kyoto",
     caption: "The lane to Yasaka Pagoda, Higashiyama — Tsuburano Kyoto",
   },
@@ -72,8 +72,13 @@ export const en: Dict = {
     cta: "See the workshop",
     alt: "Tsuburano dorayaki: matcha and chocolate batter filled with warabi mochi and cream, tea leaves on slate",
     caption: ["Tsuburano dorayaki", "matcha and chocolate,", "filled with warabi mochi and cream"],
-    insetAlt: "Deck oven in our workshop",
-    insetCaption: "Our workshop — deck oven",
+    facility: [
+      { alt: "Our workshop kitchen: deck ovens and a proofer on a blue coated floor", caption: "Ovens and proofer" },
+      { alt: "Filling machine with a hopper and rotating table in our workshop", caption: "Filling machine" },
+      { alt: "Air shower room at the entrance to our workshop", caption: "Air shower" },
+    ],
+    exteriorAlt: "Exterior of our workshop: a single-storey building clad in black steel",
+    exteriorCaption: "Our workshop, near Kansai Airport",
   },
   stores: {
     index: "Business",
@@ -81,6 +86,8 @@ export const en: Dict = {
     h2: "Restaurants",
     intro:
       "Tsuburano Kyoto, a restaurant and sweets house in Higashiyama; Tsuburano Shinjuku Gyoen, inside the Shinjuku Gyoen National Garden in Tokyo; and Umamachi Coffee, serving house-roasted coffee and sweets. Please visit us when you are in Kyoto.",
+    roasterAlt: "GIESEN coffee roaster with a black body and gold fittings",
+    roasterCaption: "House roasting — our GIESEN roaster",
     items: [
       {
         name: "Tsuburano Kyoto",

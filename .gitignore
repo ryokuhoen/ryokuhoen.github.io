@@ -10,3 +10,6 @@ _review/tmp
 public/_img
 _review/
 assets-src/
+
+# ユーザーからの受け取り素材・確認用スクリーンショット（コミットしない）
+_incoming/
