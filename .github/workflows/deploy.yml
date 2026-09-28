@@ -25,7 +25,14 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm run build
+      # next/font の Google Fonts 取得がまれに一時失敗するため、最大3回まで再試行する
+      - run: |
+          for i in 1 2 3; do
+            npm run build && exit 0
+            echo "build failed (attempt $i), retrying..."
+            sleep 20
+          done
+          exit 1
         env:
           NEXT_PUBLIC_SITE_URL: ${{ vars.SITE_URL || 'https://ryokuhoen.co.jp' }}
           NEXT_PUBLIC_ALLOW_INDEX: ${{ vars.ALLOW_INDEX || 'false' }}
